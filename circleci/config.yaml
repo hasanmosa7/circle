@@ -1,0 +1,9 @@
+version: 2.1
+
+orbs:
+  whitesource-scan: whitesource/whitesource-scan@18.10.2
+
+workflows:
+  build:
+    jobs:
+        - whitesource/whitesource-scan
