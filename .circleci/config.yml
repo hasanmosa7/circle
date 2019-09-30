@@ -13,7 +13,7 @@ jobs:
     steps:
       - checkout
       - run:
-          commands: |
+          command: |
               sudo apt update
               sudo apt install php
               curl -s https://getcomposer.org/installer | php
