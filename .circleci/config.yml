@@ -40,4 +40,4 @@ workflows:
     jobs:
       - scan:
         - parameters:
-          api_key: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
+          - api_key: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
