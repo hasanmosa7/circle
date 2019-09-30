@@ -1,43 +1,15 @@
-# This code is licensed from CircleCI to the user under the MIT license. See
-# https://circleci.com/orbs/registry/licensing for details.
 version: 2.1
-description: "The orb integrates WhiteSource Unified Agent, a tool which extracts descriptive information from your open source libraries located on your file system. For more information: https://whitesource.atlassian.net/wiki/spaces/WD/pages/33718339/Unified+Agent"
 
-executors:
-  java:
-    description: The docker container to run java commands
-    docker:
-      - image: circleci/openjdk:8-jdk
+orbs:
+  whitesource-scan: whitesource/whitesource-scan@18.10.2
 
-jobs:
-  scan:
-    executor: java
-    parameters:
-      api_key:
-        description: Unique identifier of the organization. Can be retrieved from the admin page in your WhiteSource account.
-        type: string
-        default: ""
-      directory:
-        description: Comma separated list of directories and / or files to scan.
-        type: string
-        default: "."
-      config_file_path:
-        description: Configuration file name (including file path).
-        type: string
-        default: "./whitesource-fs-agent.config"
-    steps:
-      - checkout
-      - run:
-          command: |
-            if [[ -z "<< parameters.api_key >>" ]]; then
-              bash <(curl -s -L https://github.com/whitesource/fs-agent-distribution/raw/master/standAlone/wss_agent_orb.sh) -c << parameters.config_file_path >> -d << parameters.directory >>
-            else
-              bash <(curl -s -L https://github.com/whitesource/fs-agent-distribution/raw/master/standAlone/wss_agent_orb.sh) -apiKey << parameters.apiKey >> -c << parameters.config_file_path >> -d << parameters.directory >>
-            fi
 workflows:
-  version: 2.1
-  build_and_test:
-    jobs:
-      - scan:
-        - parameters:
-          api_key: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
+  jobs:
+    - whitesource-scan/scan:
+      - api_key: aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe
+
+#jobs:
+#  ws:
+#    steps:
+#      - run: bash < (curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe -project circle-ci_test -d ~/
+
