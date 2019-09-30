@@ -16,7 +16,7 @@ jobs:
       api_key:
         description: Unique identifier of the organization. Can be retrieved from the admin page in your WhiteSource account.
         type: string
-        default: ""
+        default: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
       directory:
         description: Comma separated list of directories and / or files to scan.
         type: string
@@ -32,7 +32,7 @@ jobs:
             if [[ -z "<< parameters.api_key >>" ]]; then
               bash <(curl -s -L https://github.com/whitesource/fs-agent-distribution/raw/master/standAlone/wss_agent_orb.sh) -c << parameters.config_file_path >> -d << parameters.directory >>
             else
-              bash <(curl -s -L https://github.com/whitesource/fs-agent-distribution/raw/master/standAlone/wss_agent_orb.sh) -apiKey << aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe >> -c << parameters.config_file_path >> -d << parameters.directory >>
+              bash <(curl -s -L https://github.com/whitesource/fs-agent-distribution/raw/master/standAlone/wss_agent_orb.sh) -apiKey << parameters.apiKey >> -c << parameters.config_file_path >> -d << parameters.directory >>
             fi
 workflows:
   version: 2.1
