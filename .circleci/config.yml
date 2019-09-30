@@ -6,4 +6,4 @@ orbs:
 workflows:
   build:
     jobs:
-        - nscircle/orbcircle
+        - orbcircle/job
