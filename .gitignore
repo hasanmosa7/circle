@@ -1,2 +1,3 @@
-/shared/
-token
+/vendor
+/build/
+/graph-composer-*.phar
