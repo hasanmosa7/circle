@@ -3,6 +3,11 @@ version: 2.1
 orbs:
   whitesource-scan: whitesource/whitesource-scan@18.10.2
 
+jobs:
+  ws:
+    steps:
+      - run bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe -project circle-ci_test -d ~/
+
 workflow:
-  steps:
-    - run: bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe -project circle-ci_test -d ~/
+  jobs:
+    - ws
