@@ -16,7 +16,7 @@ jobs:
       api_key:
         description: Unique identifier of the organization. Can be retrieved from the admin page in your WhiteSource account.
         type: string
-        default: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
+        default: ""
       directory:
         description: Comma separated list of directories and / or files to scan.
         type: string
@@ -39,3 +39,4 @@ workflows:
   build_and_test:
     jobs:
       - scan:
+        api_key: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
