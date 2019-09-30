@@ -5,7 +5,7 @@ executors:
   java:
     description: The docker container to run java commands
     docker:
-      - image: whitesourcedocker/whitesource-scan:1.2.1
+      - image: circleci/openjdk:8-jdk
 
 jobs:
   scan:
@@ -15,9 +15,17 @@ jobs:
       - run:
           command: |
               apt update
+      - run:
+          command: |
               apt install php
+      - run:
+          command: |
               curl -s https://getcomposer.org/installer | php
+      - run:
+          command: |
               mv composer.phar /usr/local/bin/composer
+      - run:
+          command: |
               bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -logLevel debug -apiKey "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe" -c "./wss-unified-agent.config" -project circle-ci_test -d ~/ 
 workflows:
   version: 2.1
