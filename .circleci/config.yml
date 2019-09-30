@@ -1,18 +1,22 @@
 version: 2.1
+description: "The orb integrates WhiteSource Unified Agent, a tool which extracts descriptive information from your open source libraries located on your file system. For more information: https://whitesource.atlassian.net/wiki/spaces/WD/pages/33718339/Unified+Agent"
 
-orbs:
-  whitesource-scan: whitesource/whitesource-scan@18.10.2
+executors:
+  java:
+    description: The docker container to run java commands
+    docker:
+      - image: circleci/openjdk:8-jdk
 
 jobs:
-  myscan:
-    - whitesource-scan/scan:
-      - api_key: "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe"
+  scan:
+    executor: java
+    steps:
+      - checkout
+      - run:
+          command: |
+              bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe" -c "./whitesource-fs-agent.config" -project circle-ci_test -d ~/ 
 workflows:
-  jobs:
-    - myscan
-
-#jobs:
-#  ws:
-#    steps:
-#      - run: bash < (curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe -project circle-ci_test -d ~/
-
+  version: 2.1
+  build_and_test:
+    jobs:
+      - scan
