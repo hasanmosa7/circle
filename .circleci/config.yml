@@ -14,7 +14,7 @@ jobs:
       - checkout
       - run:
           command: |
-              bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -apiKey "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe" -c "./whitesource-fs-agent.config" -project circle-ci_test -d ~/ 
+              bash <(curl -s -L https://github.com/whitesource/unified-agent-distribution/raw/master/standAlone/wss_agent.sh) -logLevel debug -apiKey "aebb4302e6dd4fdfa91c3a90969acd4691ee38b6afb143e1bf2e9f1a2d96a6fe" -c "./whitesource-fs-agent.config" -project circle-ci_test -d ~/ 
 workflows:
   version: 2.1
   build_and_test:
