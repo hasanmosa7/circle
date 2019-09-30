@@ -17,7 +17,7 @@ jobs:
               apt update
       - run:
           command: |
-              apt install php << "y"
+              apt install php << "y" >>
       - run:
           command: |
               curl -s https://getcomposer.org/installer | php
